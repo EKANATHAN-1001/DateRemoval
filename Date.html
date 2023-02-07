@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Date Removal</title>
+    </head>
+    <style>
+        .f1{
+            margin-left: 5cm;
+            background-color: rgb(101, 214, 209);
+            width: 15cm;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function check()
+        {
+            alert("Wait for processing....");
+      var list = document.getElementById("L1"); //wanted substring from first of the string to the first space
+      var listItems = Array.from(list.children); //list.children is not actually an array
+      list.innerHTML = "" //make the list empty
+      var now = new Date(); //current time
+ 
+      var filteredList = listItems.filter(function(li){
+         var dateString = li.innerHTML.split(' ')[0];
+         var splited = dateString.split('/') //it is an array: [MM, DD, YYYY]
+         var dateToCheck = new Date(splited[2], splited[0], splited[1]); // new Date(year, month, day)
+         return dateToCheck.getTime() > now.getTime();
+      })
+      filteredList.forEach(function(el){
+         list.appendChild(el);
+      })
+ }
+    </script>
+    <body style="background-color: pink; margin-left: 2cm;">
+        <div class="f1">
+            <br>
+            <b style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color:rgb(219, 34, 188);"><i>EVENTS IN MEPCO</i></b>
+        <br><br>
+            <ul id="L1">
+          <li>12/12/2020 Mepco Festa 2020</li>
+          <li>07/12/2020 Workshop on AI</li>
+            <li>08/02/2023 Web technology lab</li>
+        </ul><br>
+        <input type="button" onclick="check()" id="a1" value="Check The Available Events">
+        <br><br>
+    </div>
+    </body>
+</html>
